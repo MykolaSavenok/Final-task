@@ -1,0 +1,151 @@
+.smoothies {
+   padding: 40px 0px;
+   background-color: #ff945f;
+   overflow: hidden;
+   // .smoothies__body
+   &__body {
+      padding-top: 10px;
+   }
+   // .smoothies__title
+   &__title {
+      color: #f5f5f5;
+      font-size: 50px;
+      font-weight: 500;
+      text-transform: capitalize;
+      margin-bottom: 50px;
+      @media (max-width: 767.98px) {
+         margin-bottom: 35px;
+         font-size: 43px;
+      }
+      @media (max-width: 480.98px) {
+         font-size: 36px;
+         text-align: center;
+      }
+   }
+   // .smoothies__menu
+   &__menu {
+   }
+   // .smoothies__list
+   &__list {
+      margin-bottom: 100px;
+      @media (max-width: 767.98px) {
+         margin-bottom: 50px;
+      }
+   }
+   // .smoothies__btn
+   &__btn {
+      padding: 10px 30px;
+      border-radius: 30px;
+      background: #f5f5f5;
+      color: #ff945f;
+      font-size: 20px;
+      font-weight: 500;
+      text-transform: capitalize;
+      transition: all 0.3s;
+      margin-bottom: 5px;
+      &:not(:last-child) {
+         margin-right: 15px;
+      }
+      &:hover {
+         background: #397dc6;
+         color: #f5f5f5;
+      }
+      &.active {
+         background-color: #397dc6;
+         color: #fff;
+      }
+   }
+   // .smoothies__block
+   &__block {
+   }
+}
+
+
+.block-items {
+   // .block-items__columns
+   &__columns {
+      display: flex;
+      gap: 15px;
+   }
+   // .block-items__item
+   &__item {
+      display: flex;
+      align-items: center;
+      border-radius: 15px;
+      background-color: #f5f5f5;
+      height: 400px;
+      max-width: 430px;
+      flex: 1 0 430px;
+   }
+   // .block-items__img
+   &__img {
+      img {
+         max-height: 350px;
+         max-width: 200px;
+      }
+   }
+   // .block-items__body
+   &__body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      padding-top: 85px;
+      padding-right: 21px;
+      padding-bottom: 70px;
+      h3 {
+         color: #ff945f;
+         font-size: 22px;
+         font-weight: 700;
+         text-transform: capitalize;
+      }
+      p {
+         color: #888;
+         font-size: 15px;
+         font-weight: 400;
+      }
+   }
+   // .block-items__buy
+   &__buy {
+      display: flex;
+      justify-content: space-between;
+      span {
+         color: #ff945f;
+         font-size: 20px;
+         font-weight: 500;
+         text-transform: capitalize;
+      }
+      button {
+         color: #fff;
+         font-weight: bold;
+         border-radius: 5px;
+         padding: 3px 6px;
+         background: #397dc6;
+         transition: all 0.3s;
+         &:hover {
+            background-color: #1b599c;
+         }
+      }
+   }
+}
+
+.modal-ok {
+   button {
+      padding: 5px;
+      font-size: 14px;
+      margin-top: 5px;
+      background: #91b9e3;
+      transition: all 0.3s;
+      &:hover {
+         color: #fff;
+         background: #397dc6;
+      }
+   }
+   p {
+      font-size: 18px;
+      font-weight: bold;
+      color: #000;
+   }
+}
+
+

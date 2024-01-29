@@ -1,0 +1,19 @@
+@import "./_reset.scss";
+
+body {
+   background-color: #ff945f;
+}
+
+#root {
+   display: flex;
+   flex-direction: column;
+   height: 100%;
+}
+
+.container {
+   max-width: 1130px;
+   height: 100%;
+   margin: 0 auto;
+   padding-right: 15px;
+   padding-left: 15px;
+}
