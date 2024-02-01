@@ -4,9 +4,9 @@ import './menu-smoothies.scss'
 import dataStandart from '../../../../server/server-data/standartMenu.mjs';
 import ModalAccept from "../ui/Modal/ModalAccept";
 import { Swiper, SwiperSlide } from "swiper/react";
-import {  Pagination, A11y } from 'swiper/modules';
+import { Pagination, A11y } from 'swiper/modules';
 import './swiper.scss';
-import 'swiper/css/pagination';
+//import 'swiper/css/pagination';
 
 
 const MenuSmoothies = () => {
@@ -59,29 +59,36 @@ const MenuSmoothies = () => {
                <Swiper
                   modules={[Pagination, A11y]}
                   spaceBetween={15}
-                  slidesPerView={3}
+                  breakpoints={{
+                     1100: {
+                        slidesPerView: 3
+                     },
+                     767.98: {
+                        slidesPerView: 2
+                     },
+                     450: {
+                        slidesPerView: 1
+                     }
+                  }}
                   pagination={{ clickable: true }}
                   onSwiper={(swiper) => console.log(swiper)}
                   onSlideChange={() => console.log('slide change')}
                >
-
-                  <div className="block-items__columns">
-                     {filteredStandart.map((item) => (
-                        <SwiperSlide key={item.id}>
-                           <div className="block-items__item">
-                              <div className="block-items__img"><img src={item.image} alt={item.name} /></div>
-                              <div className="block-items__body">
-                                 <h3>{item.name}</h3>
-                                 <p>{item.description}</p>
-                                 <div className="block-items__buy">
-                                    <span>Price: {item.price}$</span>
-                                    <button onClick={() => handleAddToBasket(item)}>+</button>
-                                 </div>
+                  {filteredStandart.map((item) => (
+                     <SwiperSlide key={item.id}>
+                        <div className="block-items__item">
+                           <div className="block-items__img"><img src={item.image} alt={item.name} /></div>
+                           <div className="block-items__body">
+                              <h3>{item.name}</h3>
+                              <p>{item.description}</p>
+                              <div className="block-items__buy">
+                                 <span>Price: {item.price}$</span>
+                                 <button onClick={() => handleAddToBasket(item)}>+</button>
                               </div>
                            </div>
-                        </SwiperSlide>
-                     ))}
-                  </div>
+                        </div>
+                     </SwiperSlide>
+                  ))}
                </Swiper>
             </div>
             <ModalAccept visible={modal} setVisible={setModal}>
