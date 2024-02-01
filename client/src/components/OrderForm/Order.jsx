@@ -26,6 +26,47 @@ const Order = ({ closeModal }) => {
       address: "",
    });
 
+   const [errors, setErrors] = useState({
+      name: "",
+      tel: "",
+      city: "",
+      address: "",
+   });
+
+   const validateForm = () => {
+      let valid = true;
+      const newErrors = {
+         name: "",
+         tel: "",
+         city: "",
+         address: "",
+      };
+
+      if (formData.name.trim() === "") {
+         newErrors.name = "Name is required!";
+         valid = false;
+      }
+
+      if (formData.tel.trim() === "") {
+         newErrors.tel = "Tel is required!";
+         valid = false;
+      }
+
+      if (formData.delivery === 'Delivery') {
+         if (formData.city.trim() === "") {
+            newErrors.city = "City is required for delivery!";
+            valid = false;
+         }
+         if (formData.address.trim() === "") {
+            newErrors.address = "Address is required for delivery!";
+            valid = false;
+         }
+      }
+
+      setErrors(newErrors);
+      return valid;
+   };
+
 
    const updateFormData = (e) => {
       setFormData({
@@ -36,17 +77,25 @@ const Order = ({ closeModal }) => {
 
    const buySmoothie = (e) => {
       e.preventDefault();
-      dispatch({
-         type: 'SET_USER_DATA',
-         payload: formData,
-      });
-      closeModal();
-      console.log(formData);
+      if (validateForm()) {
+         dispatch({
+            type: 'SET_USER_DATA',
+            payload: formData,
+         });
+         closeModal();
+         console.log(formData);
+      }
    };
 
    const cancelOrder = (e) => {
       e.preventDefault();
       closeModal();
+      setErrors({
+         name: "",
+         tel: "",
+         city: "",
+         address: "",
+      })
    };
 
    return (
@@ -116,6 +165,10 @@ const Order = ({ closeModal }) => {
                <button onClick={buySmoothie} className="form__accept">Accept</button>
                <button onClick={cancelOrder} className="form__accept">X</button>
             </div>
+            <div className="form__error">{errors.name}</div>
+            <div className="form__error">{errors.tel}</div>
+            <div className="form__error">{errors.city}</div>
+            <div className="form__error">{errors.address}</div>
          </form>
       </>
    );
