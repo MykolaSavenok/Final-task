@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
-import './menu-smoothies.scss'
+import './menuSmoothies.scss';
 import dataStandart from '../../../../server/server-data/standartMenu.mjs';
 import ModalAccept from "../ui/Modal/ModalAccept";
 import { Swiper, SwiperSlide } from "swiper/react";
