@@ -9,6 +9,7 @@ module.exports = {
       path: path.resolve(__dirname, 'dist'),
       filename: '[name]-[fullhash].js',
       clean: true,
+      publicPath: "/",
    },
    plugins: [
       new HtmlWebpackPlugin({
@@ -24,7 +25,7 @@ module.exports = {
       }),
    ],
    devServer: {
-      port: 5550,
+      port: 9999,
       historyApiFallback: true,
       static: {
          directory: path.join(__dirname, 'dist')
