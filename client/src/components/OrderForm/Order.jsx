@@ -33,6 +33,13 @@ const Order = ({ closeModal }) => {
       address: "",
    });
 
+   const validationRegex = {
+      name: /^[a-zA-Z\s]+$/,
+      tel: /^[0-9]{10}$/,
+      city: /^[a-zA-Z\s]+$/,
+      address: /^[a-zA-Z0-9\s]+$/,
+   };
+
    const validateForm = () => {
       let valid = true;
       const newErrors = {
@@ -42,31 +49,17 @@ const Order = ({ closeModal }) => {
          address: "",
       };
 
-      if (formData.name.trim() === "") {
-         newErrors.name = "Name is required!";
-         valid = false;
-      }
-
-      if (formData.tel.trim() === "") {
-         newErrors.tel = "Tel is required!";
-         valid = false;
-      }
-
-      if (formData.delivery === 'Delivery') {
-         if (formData.city.trim() === "") {
-            newErrors.city = "City is required for delivery!";
+      // Проверка каждого поля с использованием регулярного выражения
+      Object.keys(formData).forEach((field) => {
+         if (validationRegex[field] && !validationRegex[field].test(formData[field].trim())) {
+            newErrors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is invalid!`;
             valid = false;
          }
-         if (formData.address.trim() === "") {
-            newErrors.address = "Address is required for delivery!";
-            valid = false;
-         }
-      }
+      });
 
       setErrors(newErrors);
       return valid;
    };
-
 
    const updateFormData = (e) => {
       setFormData({
@@ -95,7 +88,7 @@ const Order = ({ closeModal }) => {
          tel: "",
          city: "",
          address: "",
-      })
+      });
    };
 
    return (
