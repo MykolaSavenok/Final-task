@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from "react-redux";
 import ConstructorHeader from "../ConstructorHeader/ConstructorHeader.jsx";
-import dataList from '../../../../server/server-data/ingredients.js';
-import dataPortion from '../../../../server/server-data/portion.js';
+import dataList from '../../../../server/server-data/ingredients.mjs';
+import dataPortion from '../../../../server/server-data/portion.mjs';
 import './constructor.scss';
 import ModalAccept from "../ui/Modal/ModalAccept.jsx";
 
