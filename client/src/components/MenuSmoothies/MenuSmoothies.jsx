@@ -1,19 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import './menuSmoothies.scss';
-import dataStandart from '../../../../server/server-data/standartMenu.mjs';
 import ModalAccept from "../ui/Modal/ModalAccept";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, A11y } from 'swiper/modules';
 import './swiper.scss';
-//import 'swiper/css/pagination';
 
 
 const MenuSmoothies = () => {
    const [modal, setModal] = useState(false);
    const [filter, setFilter] = useState("All");
-   const standart = dataStandart.standart;
+   const [standart, setStandart] = useState([]);
    const dispatch = useDispatch();
+
+   useEffect(() => {
+      fetchMenu();
+      console.log(fetchMenu);
+   }, []);
+
+   const fetchMenu = async () => {
+      try {
+         const response = await fetch('/standartMenu');
+         if (!response.ok) {
+            throw new Error('Failed to fetch menu data');
+         }
+         const data = await response.json(); 
+         setStandart(data.standart); 
+      } catch (error) {
+         console.error("Error fetching menu:", error);
+      }
+   };
 
 
    const handleAddToBasket = (item) => {
@@ -71,8 +87,6 @@ const MenuSmoothies = () => {
                      }
                   }}
                   pagination={{ clickable: true }}
-                  onSwiper={(swiper) => console.log(swiper)}
-                  onSlideChange={() => console.log('slide change')}
                >
                   {filteredStandart.map((item) => (
                      <SwiperSlide key={item.id}>
