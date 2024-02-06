@@ -1,21 +1,30 @@
 .about-us {
-   padding-top: 80px;
+   padding-top: 120px;
    padding-bottom: 30px;
+   @media (max-width: 450.98px) {
+      padding-top: 80px;
+   }
    // .about-us__row
    &__row {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 40px;
+      margin-bottom: 60px;
+      gap: 20px;
       @media (max-width: 767.98px) {
-         flex-direction: column;
+         flex-direction: column-reverse;
          gap: 20px;
       }
    }
    // .about-us__text
    &__text {
+      flex: 1 1 50%;
       color: #fff;
       font-size: 18px;
       font-weight: 500;
+      padding: 0px 10px 0px 0px;
+      @media (max-width: 767.98px) {
+         padding: 0;
+      }
    }
    // .about-us__image
    &__image {
@@ -25,7 +34,7 @@
          height: 100%;
          object-fit: cover;
          transition: all 0.3s;
-         &:hover {   
+         &:hover {
             transform: scale(1.05, 1.05);
          }
       }
@@ -37,7 +46,7 @@
    font-size: 18px;
    font-weight: 500;
    // .contacts__header
-   &__header {
+   &__title {
       font-size: 24px;
       margin-bottom: 15px;
    }
@@ -47,16 +56,34 @@
    }
    &__info {
       p {
-         margin-bottom: 5px;
+         margin-bottom: 7px;
       }
    }
    // .contacts__number
    &__number {
       display: inline-flex;
       flex-direction: column;
+      letter-spacing: 1.1px;
       a {
          color: #fff;
          margin-bottom: 5px;
+         transition: all 0.3s;
+         &:hover {
+            color: #397dc6;
+         }
+      }
+   }
+   &__body {
+      display: flex;
+      gap: 20px;
+      @media (max-width: 767.98px) {
+         flex-direction: column;
+      }
+   }
+   &__img {
+      img {
+         width: 100%;
+         object-fit: cover;
       }
    }
 }
