@@ -4,7 +4,7 @@
       "build": "webpack",
       "deploy-github": "gh-pages -d dist",
       "start": "webpack serve --mode=development --open",
-      "nodemon": "nodemon ./server/server.mjs"
+      "nodemon": "nodemon server/server/server.mjs --watch dist --watch server/server"
    },
    "devDependencies": {
       "@babel/core": "^7.23.0",
