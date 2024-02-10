@@ -82,6 +82,22 @@ module.exports = {
                      name: "[name].[ext]",
                      outputPath: "images/",
                   },
+                  loader: 'image-webpack-loader',
+                  options: {
+                     mozjpeg: {
+                        progressive: true,
+                        quality: 65,
+                     },
+                     optipng: {
+                        enabled: false,
+                     },
+                     svgo: {
+                        enabled: true,
+                     },
+                     jpegtran: {
+                        progressive: true,
+                     },
+                  },
                },
             ],
          },
@@ -89,5 +105,5 @@ module.exports = {
    },
    optimization: {
       minimizer: [new CssMinimizerPlugin()],
-    },
+   },
 };
