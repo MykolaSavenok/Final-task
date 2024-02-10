@@ -28,14 +28,6 @@ server.get("/standartMenu", (_, reply) => {
    return reply.send(standartMenu);
 });
 
-server.get("/ingredients", (_, reply) => {
-   return reply.send(ingredients);
-});
-
-server.get("/portion", (_, reply) => {
-   return reply.send(portion);
-});
-
 const port = process.env.PORT || 9999;
 const host = process.env.HOST || "localhost";
 
