@@ -1,11 +1,10 @@
 {
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "npm-run-all --parallel watch:webpack start:server open",
-      "start:server": "nodemon server/server/server.mjs --watch dist --watch server",
-      "open": "ping 127.0.0.1 -n 6 > nul && start http://localhost:9999",
-      "watch:webpack": "webpack --mode=development --progress --watch",
-      "build": "webpack"
+      "build": "webpack",
+      "start:server": "nodemon server/server/server.mjs --watch dist --watch server/server",
+      "start": "npm-run-all --parallel watch:webpack start:server",
+      "watch:webpack": "webpack --mode=development --progress --watch"
    },
    "devDependencies": {
       "@babel/core": "^7.23.0",
