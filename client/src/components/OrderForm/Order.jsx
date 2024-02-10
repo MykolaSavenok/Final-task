@@ -49,7 +49,6 @@ const Order = ({ closeModal }) => {
          address: "",
       };
 
-      // Проверка каждого поля с использованием регулярного выражения
       Object.keys(formData).forEach((field) => {
          if (validationRegex[field] && !validationRegex[field].test(formData[field].trim())) {
             newErrors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is invalid!`;
@@ -106,7 +105,7 @@ const Order = ({ closeModal }) => {
                />
             </div>
             <div className="form__pair">
-               <label htmlFor="form-tel">Tel:</label>
+               <label htmlFor="form-tel">Phone:</label>
                <input
                   type="text"
                   id="form-tel"
