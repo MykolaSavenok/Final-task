@@ -15,7 +15,6 @@ const MenuSmoothies = () => {
 
    useEffect(() => {
       fetchMenu();
-      console.log(fetchMenu);
    }, []);
 
    const fetchMenu = async () => {
