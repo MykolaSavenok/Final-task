@@ -3,10 +3,10 @@
       "test": "echo \"Error: no test specified\" && exit 1",
       "start": "npm-run-all --parallel watch:webpack start:server open",
       "start:server": "nodemon server/server/server.mjs --watch dist --watch server",
-      "open": "timeout /t 5 /nobreak && start http://localhost:9999",
+      "open": "ping 127.0.0.1 -n 6 > nul && start http://localhost:9999",
       "watch:webpack": "webpack --mode=development --progress --watch",
       "build": "webpack"
-    },
+   },
    "devDependencies": {
       "@babel/core": "^7.23.0",
       "@babel/preset-env": "^7.22.20",
@@ -21,6 +21,7 @@
       "html-webpack-plugin": "^5.5.3",
       "mini-css-extract-plugin": "^2.7.6",
       "nodemon": "^3.0.1",
+      "npm-run-all": "^4.1.5",
       "path": "^0.12.7",
       "sass": "^1.69.3",
       "sass-loader": "^13.3.2",
