@@ -1,11 +1,12 @@
 {
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "build": "webpack",
-      "deploy-github": "gh-pages -d dist",
-      "start": "webpack serve --mode=development --open",
-      "nodemon": "nodemon server/server/server.mjs --watch dist --watch server/server"
-   },
+      "start": "npm-run-all --parallel watch:webpack start:server open",
+      "start:server": "nodemon server/server/server.mjs --watch dist --watch server",
+      "open": "timeout /t 5 /nobreak && start http://localhost:9999",
+      "watch:webpack": "webpack --mode=development --progress --watch",
+      "build": "webpack"
+    },
    "devDependencies": {
       "@babel/core": "^7.23.0",
       "@babel/preset-env": "^7.22.20",
