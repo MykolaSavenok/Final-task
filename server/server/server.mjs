@@ -4,8 +4,6 @@ import path from "path";
 import cors from "@fastify/cors";
 import { fileURLToPath } from "url";
 import standartMenu from "../server-data/standartMenu.mjs"
-import ingredients from "../server-data/ingredients.mjs"
-import portion from "../server-data/portion.mjs"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,6 +24,10 @@ server.get('/', (_, reply) => {
 
 server.get("/standartMenu", (_, reply) => {
    return reply.send(standartMenu);
+});
+
+server.setNotFoundHandler((_, reply) => {
+   reply.sendFile('index.html');
 });
 
 const port = process.env.PORT || 9999;
