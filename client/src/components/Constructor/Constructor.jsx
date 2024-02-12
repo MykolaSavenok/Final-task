@@ -6,6 +6,9 @@ import dataList from '../../../../server/server-data/ingredients.mjs';
 import dataPortion from '../../../../server/server-data/portion.mjs';
 import './constructor.scss';
 import ModalAccept from "../ui/Modal/ModalAccept.jsx";
+import PortionSelector from "./PortionSelector.jsx";
+import IngredientSelector from "./IngredientSelector.jsx";
+import { calculateSmoothieTotalPrice } from "./calculateSmoothieTotalPrice.js";
 
 const Constructor = () => {
    const smoothiesList = dataList.fruits;
@@ -20,60 +23,6 @@ const Constructor = () => {
    const [addSelect, setAddSelect] = useState(false);
    const dispatch = useDispatch();
 
-
-   const ingredientsSelects = () => (
-      [...fruitIngredients, ...vegetableIngredients].map((selectedIngredient, index) => (
-         <div className="constructor__list custom-select" key={index}>
-            <label className="custom-select__label" htmlFor={`ingredientSelect${index}`}>
-               {selectedIngredient.type === "fruit" ? "Choose a fruit ingredient" : "Choose a vegetable ingredient"}
-            </label>
-            <div className="custom-select__selects">
-               <select
-                  id={`ingredientSelect${index}`}
-                  value={selectedIngredient.id}
-                  onChange={(e) => handleSelectChange(e, index)}
-               >
-                  <option disabled className="custom-select__option" value="">Select an ingredient</option>
-                  {selectedIngredient.type === "fruit" ? (
-                     smoothiesList.map(fruit => (
-                        <option key={fruit.id} value={fruit.id} disabled={!fruit.inStock}>
-                           {fruit.name}
-                        </option>
-                     ))
-                  ) : (
-                     vegetablesList.map(vegetable => (
-                        <option key={vegetable.id} value={vegetable.id} disabled={!vegetable.inStock}>
-                           {vegetable.name}
-                        </option>
-                     ))
-                  )}
-               </select>
-               <button className="custom-select__btn" onClick={() => deleteSelect(index)}>Delete</button>
-            </div>
-         </div>
-      ))
-   );
-
-   const calculateSmoothieTotalPrice = () => {
-      const selectedIngredients = [...fruitIngredients, ...vegetableIngredients].filter(
-         (ingredient) => ingredient.id !== ""
-      );
-
-      const totalAmount = selectedIngredients.reduce((acc, ingredient) => acc + ingredient.amount, 0);
-
-      const totalPrice = selectedIngredients.reduce((acc, ingredient) => {
-         const ingredientList = ingredient.type === "fruit" ? smoothiesList : vegetablesList;
-         const selected = ingredientList.find((item) => item.id === ingredient.id);
-         if (selected) {
-            const portionPercentage = ingredient.amount / totalAmount;
-            const ingredientPrice = (portionPercentage * selectedPortion * selected.literPrice) / 1000;
-            return acc + ingredientPrice;
-         }
-         return acc;
-      }, 0);
-
-      return totalPrice.toFixed(2);
-   };
 
    const handleSelectChange = (e, index) => {
       const newId = e.target.value;
@@ -94,7 +43,7 @@ const Constructor = () => {
    };
 
    useEffect(() => {
-      const price = calculateSmoothieTotalPrice();
+      const price = calculateSmoothieTotalPrice(fruitIngredients, vegetableIngredients, selectedPortion, smoothiesList, vegetablesList);
       setSmoothieTotalPrice(price);
    }, [fruitIngredients, vegetableIngredients, selectedPortion]);
 
@@ -174,7 +123,6 @@ const Constructor = () => {
       setAddToBasketDisabled(!hasSelectedIngredient);
    }, [fruitIngredients, vegetableIngredients]);
 
-
    return (
       <section className="constructor">
          <ConstructorHeader />
@@ -182,30 +130,18 @@ const Constructor = () => {
             <div className="constructor__img"><img src="/static/images/constructor/customSmoothie.jpg" alt="img" /></div>
             <div className="constructor__smoothies">
                <h4>Smoothies constructor</h4>
-               <div>
-                  <div className="constructor__portion-title">Select your portion:</div>
-                  <div className="constructor__portion">
-                     {dataPortion.map(portion => (
-                        <div className="constructor__portion-row" key={portion.id}>
-                           <input
-                              id={portion.id}
-                              type="radio"
-                              name="portion"
-                              checked={selectedPortion === portion.size}
-                              onChange={() => setSelectedPortion(Number(portion.size))}
-                           />
-                           <div htmlFor={portion.size}>
-                              {portion.name}: {portion.size}ml
-                           </div>
-                        </div>
-                     ))}
-                  </div>
-               </div>
+               <PortionSelector portion={dataPortion} handlePortionChange={setSelectedPortion} selectedPortion={selectedPortion} />
                <div className="constructor__btn">
                   <button onClick={addFruit} disabled={addSelect}>Add<br />Fruits</button>
                   <button onClick={addVega} disabled={addSelect}>Add<br />Vegetables</button>
                </div>
-               {ingredientsSelects()}
+               <IngredientSelector
+                  ingredients={[...fruitIngredients, ...vegetableIngredients]}
+                  handleSelectChange={handleSelectChange}
+                  smoothiesList={smoothiesList}
+                  vegetablesList={vegetablesList}
+                  deleteSelect={deleteSelect}
+               />
                <div className="constructor__buy">
                   <span>Price: {smoothieTotalPrice}$</span>
                   <button onClick={() => handleAddToBasket()} disabled={addToBasketDisabled}>Add to basket</button>
