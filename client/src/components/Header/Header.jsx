@@ -27,7 +27,9 @@ const Header = () => {
    return (
       <header className="header">
          <div className="header__body container">
-            <NavLink to={'/'} ><div className="header__logo"><img src="/static/images/main/smoothie-logo.png" alt="logo" /></div></NavLink>
+            <NavLink to={'/'} >
+            <div className="header__logo"><img src="/static/images/main/smoothie-logo.png" alt="logo" /></div>
+            </NavLink>
             <div className="header__menu menu">
                <nav className={`menu__body ${isMenuOpen ? '_active-menu' : ''}`}>
                   <ul className="menu__list">
@@ -36,19 +38,21 @@ const Header = () => {
                      <NavLink to={'/about'} onClick={closeMenu}><li className="menu__link">About</li></NavLink>
                   </ul>
                </nav>
+            </div>
+            <div className='header__row'>
+               <NavLink to={'/basket'}
+                  onClick={closeMenu}>
+                  <button className="header__basket">
+                     <img src="/static/images/basket/basket.svg" alt="basket" />
+                     <span>{selectTotalCount()}</span>
+                  </button>
+               </NavLink>
                <div onClick={toggleMenu} className={`menu__icon icon-menu ${isMenuOpen ? '_active-menu' : ''}`}>
                   <span></span>
                   <span></span>
                   <span></span>
                </div>
             </div>
-            <NavLink to={'/basket'}
-               onClick={closeMenu}>
-               <button className="header__basket">
-                  <img src="/static/images/basket/basket.svg" alt="basket" />
-                  <span>{selectTotalCount()}</span>
-               </button>
-            </NavLink>
          </div>
       </header>
    )

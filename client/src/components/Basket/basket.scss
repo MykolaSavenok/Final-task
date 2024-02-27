@@ -6,9 +6,6 @@
       color: #f5f5f5;
       margin-bottom: 25px;
    }
-   // .basket__body
-   &__body {
-   }
    // .basket__info
    &__info {
       font-size: 24px;
@@ -121,15 +118,11 @@
       }
    }
 }
-.total {
-}
-
 .items {
    display: flex;
    flex-direction: column;
    gap: 15px;
 }
-
 .info-order {
    padding-top: 20px;
    display: flex;
