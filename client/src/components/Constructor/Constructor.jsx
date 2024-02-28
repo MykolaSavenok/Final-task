@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from "react-redux";
 import ConstructorHeader from "../ConstructorHeader/ConstructorHeader.jsx";
 import dataList from '../../../../server/server-data/ingredients.mjs';
-import dataPortion from '../../../../server/server-data/portion.mjs';
+import dataPortion from './portion.mjs';
 import './constructor.scss';
 import ModalAccept from "../ui/Modal/ModalAccept.jsx";
 import PortionSelector from "./PortionSelector.jsx";
@@ -66,17 +66,25 @@ const Constructor = () => {
 
    const addFruit = () => {
       if (fruitIngredients.length + vegetableIngredients.length < 5) {
-         setFruitIngredients((prevIngredients) => [...prevIngredients, { id: "", type: "fruit", amount: 1 }]);
-      } else {
-         setAddSelect(true)
+         setFruitIngredients((prevIngredients) => {
+            const newIngredients = [...prevIngredients, { id: "", type: "fruit", amount: 1 }];
+            if (newIngredients.length + vegetableIngredients.length === 5) {
+               setAddSelect(true);
+            }
+            return newIngredients;
+         });
       }
    };
-
+   
    const addVega = () => {
       if (fruitIngredients.length + vegetableIngredients.length < 5) {
-         setVegetableIngredients((prevIngredients) => [...prevIngredients, { id: "", type: "vegetable", amount: 1 }]);
-      } else {
-         setAddSelect(true)
+         setVegetableIngredients((prevIngredients) => {
+            const newIngredients = [...prevIngredients, { id: "", type: "vegetable", amount: 1 }];
+            if (fruitIngredients.length + newIngredients.length === 5) {
+               setAddSelect(true);
+            }
+            return newIngredients;
+         });
       }
    };
 

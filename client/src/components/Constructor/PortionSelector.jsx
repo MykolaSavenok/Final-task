@@ -3,7 +3,7 @@ import React from "react";
 const PortionSelector = ({ portion, selectedPortion, handlePortionChange }) => {
    return (
       <div>
-         <div className="constructor__portion-title">Select your portion:</div>
+         <div className="constructor__portion-title">Select your portion: Max 5</div>
          <div className="constructor__portion">
             {portion.map(portion => (
                <div className="constructor__portion-row" key={portion.id}>
