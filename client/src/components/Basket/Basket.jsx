@@ -99,7 +99,7 @@ const Basket = () => {
                                     <button onClick={() => addCustomCount(item)}>+</button>
                                  </div>
                                  <div className="shop-item__price">
-                                    <span>Price: {item.price * item.count}$ </span>
+                                    <span>Price: {(item.price * item.count).toFixed(2)}$ </span>
                                     <button onClick={() => deleteCustomsmoothie(item)}>X</button>
                                  </div>
                               </div>
@@ -117,7 +117,7 @@ const Basket = () => {
                                     <button onClick={() => addItemCount(item)}>+</button>
                                  </div>
                                  <div className="shop-item__price">
-                                    <span>Price: {item.price * item.count}$</span>
+                                    <span>Price: {(item.price * item.count).toFixed(2)}$</span>
                                     <button onClick={() => deletesmoothie(item)}>X</button>
                                  </div>
                               </div>
@@ -126,7 +126,7 @@ const Basket = () => {
                      </div>
                      <div className="info-order">
                         <button className="info-order__make-order" onClick={() => setModal(true)}>Make an order</button>
-                        <p className="info-order__total">Total Price: {totalPrice}$</p>
+                        <p className="info-order__total">Total Price: {totalPrice.toFixed(2)}$</p>
                      </div>
                   </div>
                )}

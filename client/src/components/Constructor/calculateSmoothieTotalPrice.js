@@ -16,5 +16,7 @@ export function calculateSmoothieTotalPrice(fruitIngredients, vegetableIngredien
       return acc;
    }, 0);
 
-   return totalPrice.toFixed(2);
+   const roundedPrice = Number(Math.round(totalPrice * 100) / 100);
+
+   return roundedPrice.toFixed(2);
 };
